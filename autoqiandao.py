@@ -19,7 +19,7 @@ try:
     driver.get("https://69yun69.com/auth/login")
 
     # 填写用户名和密码
-    username = driver.find_element(By.NAME, "username")  # 根据网站的实际 HTML 结构调整
+    username = driver.find_element(By.NAME, "email")  # 根据网站的实际 HTML 结构调整
     password = driver.find_element(By.NAME, "password")
 
     username.send_keys("ccnuzw@gmail.com")
