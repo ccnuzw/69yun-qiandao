@@ -26,15 +26,16 @@ try:
     password.send_keys("zw321561")
     password.send_keys(Keys.RETURN)
 
-    time.sleep(10)  # 等待登录完成
+    time.sleep(5)  # 等待登录完成
 
     # 进入签到页面
     driver.get("https://69yun69.com/user")
 
-    # 查找并点击签到按钮
-    sign_in_button = driver.find_element(By.XPATH, "//button[contains(text(), '每日签到')]")
-    sign_in_button.click()
+   time.sleep(3)
 
+    # **方法 1：直接执行 JavaScript**
+    driver.execute_script("index.checkin();")
+    
     time.sleep(5)  # 等待签到完成
 
     print("签到成功！")
