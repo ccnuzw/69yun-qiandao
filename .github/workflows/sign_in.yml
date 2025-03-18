@@ -1,22 +1,27 @@
-name: 自动签到
+name: Auto Check-in
 
 on:
   schedule:
-    - cron: '0 1 * * *'  # 每天 00:00 UTC 运行
-  workflow_dispatch:
+    - cron: '0 1 * * *'  # 每天 UTC 0:00 执行（北京时间 8:00）
+  workflow_dispatch:  # 允许手动运行
 
 jobs:
-  signin:
+  run-script:
     runs-on: ubuntu-latest
     steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
+      - name: Checkout Repo
+        uses: actions/checkout@v3
 
-      - name: 安装 Python 和依赖
-        run: |
-          sudo apt update
-          sudo apt install -y chromium-chromedriver
-          pip install selenium
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
 
-      - name: 运行签到脚本
-        run: python autoqiandao.py
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Check-in Script
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: python checkin.py
